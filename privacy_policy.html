@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy - GamePlayMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .top-section {
+      position: relative;
+      background: url("images/1750437383534.jpg") no-repeat center/cover;
+      background-size: cover;
+      color: white;
+    }
+    .top-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .top-section > header,
+    .top-section > .hero {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header {
+      background: transparent;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header h2 {
+      font-size: 24px;
+      margin: 0;
+      color: white;
+    }
+    header nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0ff;
+    }
+    nav a.active {
+      background-color: #ffffff;
+      color: #3f3cbb;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .hero {
+      text-align: center;
+      padding: 120px 20px;
+      background: none;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 30px;
+      max-width: 900px;
+      margin: -50px auto 40px auto;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #3f3cbb;
+      margin-bottom: 30px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .privacy-image { /* New style for the image */
+      width: 300px; /* Adjusted size */
+      height: 300px; /* Adjusted size */
+      border-radius: 50%;
+      object-fit: contain; /* Changed to 'contain' to show full image */
+      margin-bottom: 30px; /* Space below the image */
+      border: 4px solid #6f61e8;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .privacy-section {
+      width: 100%;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .privacy-section h3 {
+      font-size: 24px;
+      color: #6f61e8;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #e0e0ff;
+      padding-bottom: 5px;
+    }
+
+    .privacy-section p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .privacy-section ul {
+      list-style: disc;
+      margin-left: 20px;
+      color: #555;
+    }
+
+    .privacy-section ul li {
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background-color: #6f61e8;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto;
+    }
+    footer h3 {
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links div {
+      min-width: 150px;
+      text-align: left;
+    }
+    footer .footer-links div strong {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #d1cfff;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        margin: 5px 10px;
+      }
+      .hero {
+        padding: 80px 20px;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .main-content {
+        padding: 30px 15px;
+        margin: -30px auto 20px auto;
+      }
+      .privacy-image {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  </style>
+  <script>
+    function scrollToTopIfSamePage(event) {
+      const currentPath = location.pathname.split("/").pop();
+      const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+      if (isSamePage) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="top-section">
+    <header>
+      <h2>GamePlayMate ©</h2>
+      <nav>
+        <a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a>
+        <a href="games.html">Games</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+        <!-- Removed FAQ and Privacy Policy links from header -->
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy is important to us.</p>
+    </section>
+  </div>
+
+  <main class="main-content">
+    <h2 class="section-title">GamePlayMate Privacy Policy</h2>
+    <img src="images/20250708_1033_Gacha Character Privacy_simple_compose_01jzm6jfm1f5bsvbhbnnqxx7mm.png" alt="Gacha Character Privacy" class="privacy-image">
+
+    <div class="privacy-section">
+      <h3>1. Introduction</h3>
+      <p>This Privacy Policy describes how GamePlayMate ("we," "us," or "our") collects, uses, and shares your personal information when you use our website and services. By accessing or using our services, you agree to the terms of this Privacy Policy.</p>
+    </div>
+
+    <div class="privacy-section">
+      <h3>2. Information We Collect</h3>
+      <p>We may collect various types of information in connection with the services we provide, including:</p>
+      <ul>
+        <li><strong>Personal Identifiable Information (PII):</strong> Such as your name, email address, and payment information when you make a booking or contact us.</li>
+        <li><strong>Game Account Information:</strong> If you utilize our game playing or account review services, you may provide us with access to your game account details. We handle this information with extreme care and only use it for the purpose of providing the requested service.</li>
+        <li><strong>Usage Data:</strong> Information about how you access and use our website, including your IP address, browser type, pages visited, and time spent on our site.</li>
+        <li><strong>Communication Data:</strong> Records of your communications with us, including emails and Discord messages.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-section">
+      <h3>3. How We Use Your Information</h3>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li>To provide and manage the services you request (e.g., game playing, coaching, account reviews).</li>
+        <li>To process transactions and send you related information, including purchase confirmations and invoices.</li>
+        <li>To communicate with you about your bookings, inquiries, and service updates.</li>
+        <li>To improve our website and services, and to develop new features.</li>
+        <li>To ensure the security and integrity of our services.</li>
+        <li>To comply with legal obligations.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-section">
+      <h3>4. Data Sharing and Disclosure</h3>
+      <p>We do not sell or rent your personal information to third parties. We may share your information in the following limited circumstances:</p>
+      <ul>
+        <li>With our team members who are directly involved in providing the services you have booked.</li>
+        <li>With trusted third-party service providers who assist us in operating our website, conducting our business, or servicing you (e.g., payment processors). These parties are obligated to keep your information confidential.</li>
+        <li>When required by law or in response to valid legal requests, such as subpoenas or court orders.</li>
+        <li>To protect our rights, property, or safety, or the rights, property, or safety of others.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-section">
+      <h3>5. Data Security</h3>
+      <p>We implement reasonable security measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure. Therefore, we cannot guarantee absolute security.</p>
+    </div>
+
+    <div class="privacy-section">
+      <h3>6. Your Rights</h3>
+      <p>Depending on your jurisdiction, you may have certain rights regarding your personal information, including the right to:</p>
+      <ul>
+        <li>Access, correct, or delete your personal information.</li>
+        <li>Object to the processing of your personal information.</li>
+        <li>Request a copy of your personal information.</li>
+      </ul>
+      <p>To exercise these rights, please contact us using the information provided below.</p>
+    </div>
+
+    <div class="privacy-section">
+      <h3>7. Changes to This Privacy Policy</h3>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+    </div>
+
+    <div class="privacy-section">
+      <h3>8. Contact Us</h3>
+      <p>If you have any questions or concerns about this Privacy Policy, please contact us:</p>
+      <p>Email: chathuraishtaweera@gmail.com</p>
+      <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <h3>GamePlayMate &copy; 2025</h3>
+    <div class="footer-links">
+      <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+        <p><a href="games.html">Games</a></p>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <p><a href="faq.html">FAQ</a></p>
+        <p><a href="privacy_policy.html" class="active">Privacy Policy</a></p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Email: chathuraishtaweera@gmail.com</p>
+        <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

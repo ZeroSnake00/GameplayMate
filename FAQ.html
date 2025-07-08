@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ - GamePlayMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .top-section {
+      position: relative;
+      background: url("images/1750437383534.jpg") no-repeat center/cover;
+      background-size: cover;
+      color: white;
+    }
+    .top-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .top-section > header,
+    .top-section > .hero {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header {
+      background: transparent;
+      padding: 15px 40px; /* Adjusted padding to move header up a little */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header h2 {
+      font-size: 24px;
+      margin: 0;
+      color: white;
+    }
+    header nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0ff;
+    }
+    nav a.active {
+      background-color: #ffffff;
+      color: #3f3cbb;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .hero {
+      text-align: center;
+      padding: 120px 20px; /* Adjusted padding to move hero section up a little */
+      background: none;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .faq-page-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      gap: 20px;
+      max-width: 1600px;
+      margin: -50px auto 40px auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 30px;
+      max-width: 900px; /* Adjusted max-width for FAQ content */
+      margin: 0 auto; /* Center the content */
+      width: 100%;
+      box-sizing: border-box;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .section-title-container {
+      display: flex;
+      flex-direction: column; /* Stack title and image vertically */
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #3f3cbb;
+      text-align: center;
+      margin: 0;
+      padding-right: 0; /* No padding needed here as image is below */
+      padding-left: 0;
+    }
+
+    .faq-item {
+      width: 100%;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .faq-question {
+      padding: 20px 25px;
+      background-color: #e0e0ff;
+      color: #3f3cbb;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #c1c1ff;
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background-color: #c1c1ff;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active::after {
+      content: '-';
+      transform: rotate(0deg);
+    }
+
+    .faq-answer {
+      padding: 0 25px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Reduced duration for smoother animation */
+      background-color: white;
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .faq-answer.active {
+      max-height: 500px; /* Increased max-height to ensure smooth reveal of all content */
+      padding: 20px 25px;
+    }
+
+    .faq-title-image {
+      position: static; /* Remove absolute positioning */
+      transform: none;
+      margin-top: 15px; /* Space between title and image */
+      width: 200px; /* Set a fixed width */
+      height: 200px; /* Set height equal to width for a perfect circle */
+      border-radius: 50%; /* Make it a circle */
+      object-fit: contain; /* Ensure the entire image is visible, even if it leaves space */
+      border: 4px solid #6f61e8;
+      z-index: 3;
+    }
+
+    footer {
+      background-color: #6f61e8;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto;
+    }
+    footer h3 {
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links div {
+      min-width: 150px;
+      text-align: left;
+    }
+    footer .footer-links div strong {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #d1cfff;
+    }
+
+    @media (max-width: 1200px) {
+      .faq-page-layout {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 10px;
+        margin-top: 0;
+      }
+      .main-content {
+        padding: 30px;
+      }
+      .section-title-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .section-title {
+        padding-right: 0;
+      }
+      .faq-title-image {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        max-height: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        margin: 5px 10px;
+      }
+      .hero {
+        padding: 80px 20px;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .main-content {
+        padding: 30px 15px;
+        margin: -30px auto 20px auto;
+      }
+      .faq-question {
+        font-size: 18px;
+        padding: 15px 20px;
+      }
+      .faq-answer {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+  <script>
+    function scrollToTopIfSamePage(event) {
+      const currentPath = location.pathname.split("/").pop();
+      const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+      if (isSamePage) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          question.classList.toggle('active');
+          answer.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="top-section">
+    <header>
+      <h2>GamePlayMate ©</h2>
+      <nav>
+        <a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a>
+        <a href="games.html">Games</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+        <!-- Removed FAQ link from header -->
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Frequently Asked Questions</h1>
+      <p>Find answers to common questions about our services.</p>
+    </section>
+  </div>
+
+  <div class="faq-page-layout">
+    <main class="main-content">
+      <div class="section-title-container">
+        <h2 class="section-title">General Questions</h2>
+        <img src="images/20250708_0332_Mona in Thought_simple_compose_01jzkegjaaft9r2hs5hf26m98q.png" alt="Mona from Genshin Impact" class="faq-title-image">
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What services does GamePlayMate offer?</div>
+        <div class="faq-answer">
+          <p>GamePlayMate offers professional game playing, coaching, and account review services for popular gacha games like Genshin Impact, Honkai Star Rail, Zenless Zone Zero, and Wuthering Waves.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I book a service?</div>
+        <div class="faq-answer">
+          <p>You can book a service by navigating to the "Games" page, selecting your desired game, and then choosing a service package or a specific team member to book. Follow the on-screen instructions to complete your booking.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What payment methods do you accept?</div>
+        <div class="faq-answer">
+          <p>We accept various secure payment methods, including major credit cards and PayPal. Specific options will be displayed during the checkout process.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Is my account information safe with GamePlayMate?</div>
+        <div class="faq-answer">
+          <p>Yes, we prioritize the security and privacy of your account. All our team members are vetted professionals, and we use secure practices to ensure your data is protected. We recommend changing your password after service completion for added security.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I choose a specific team member for my service?</div>
+        <div class="faq-answer">
+          <p>Yes, on each game's order page, you have the option to book a specific team member based on their expertise and availability. You can also choose to book any available team member for general services.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title" style="margin-top: 50px;">Coaching & Playing Services</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What is the difference between game playing and coaching?</div>
+        <div class="faq-answer">
+          <p><strong>Game Playing:</strong> Our team members log into your account to complete specific in-game tasks, suchs as farming materials, clearing difficult content (e.g., Spiral Abyss, Memory of Chaos), or progressing through story quests.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How long does a coaching session last?</div>
+        <div class="faq-answer">
+          <p>Coaching sessions are typically booked by the hour, but custom arrangements can be made based on your needs. Please discuss your requirements with your chosen coach.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What is an account review?</div>
+        <div class="faq-answer">
+          <p>An account review involves our experts analyzing your in-game account, including your character roster, builds, artifacts/relics, and overall progression. We then provide a personalized growth plan and recommendations to optimize your account for better performance.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <h3>GamePlayMate &copy; 2025</h3>
+    <div class="footer-links">
+      <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+        <p><a href="games.html">Games</a></p>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <p><a href="faq.html" class="active">FAQ</a></p>
+        <p><a href="#">Privacy Policy</a></p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Email: chathuraishtaweera@gmail.com</p>
+        <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Genshin Impact - GamePlayMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .top-section {
+      position: relative;
+      /* Restored consistent background image for the header */
+      background: url("images/1750437383534.jpg") no-repeat center/cover;
+      background-size: cover;
+      color: white;
+      padding-top: 50px; /* Adjusted padding-top to bring header higher */
+    }
+    .top-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .top-section > header,
+    .top-section > .hero {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    header {
+      background: transparent;
+      padding: 10px 40px; /* Adjusted padding for better vertical alignment */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      position: absolute; /* Position header absolutely within top-section */
+      top: 0;
+      left: 0;
+    }
+    header h2 {
+      font-size: 24px;
+      margin: 0;
+    }
+    header nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0ff;
+    }
+    nav a.active {
+      background-color: #ffffff;
+      color: #3f3cbb;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 110px 20px; /* Adjusted padding to fit the image and title */
+      background: none;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 24px;
+      margin-top: -10px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .hero button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px; /* Adjusted padding */
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: white; /* Added back white background for the main content block */
+      border-radius: 15px; /* Rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transform: translateY(-50px); /* Lift it up to overlap the hero section */
+      position: relative;
+      z-index: 2; /* Ensure it's above the top-section */
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #3f3cbb;
+      margin-bottom: 30px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .order-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .option-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .option-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-card h3 {
+      font-size: 24px;
+      color: #6f61e8;
+      margin-bottom: 15px;
+    }
+
+    .option-card p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .option-card .price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3f3cbb;
+      margin-bottom: 25px;
+    }
+
+    .option-card button {
+      background-color: #3f3cbb;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .option-card button:hover {
+      background-color: #6f61e8;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Enhanced Highlight effect for the button */
+    @keyframes highlight-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(111, 97, 232, 0.7), 0 0 0 0 rgba(111, 97, 232, 0.5); }
+      50% { box-shadow: 0 0 0 15px rgba(111, 97, 232, 0), 0 0 0 25px rgba(111, 97, 232, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(111, 97, 232, 0.7), 0 0 0 0 rgba(111, 97, 232, 0.5); }
+    }
+
+    .highlighted-button {
+      animation: highlight-pulse 1.5s infinite;
+      border: 3px solid #6f61e8 !important; /* Ensure visibility */
+      background-color: #6f61e8 !important; /* Make it stand out more */
+    }
+
+    .content-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background-color: #6f61e8;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto; /* Pushes footer to the bottom */
+    }
+    footer h3 {
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links div {
+      min-width: 150px;
+      text-align: left;
+    }
+    footer .footer-links div strong {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #d1cfff;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        margin: 5px 10px;
+      }
+      .hero {
+        padding: 80px 20px;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .hero p {
+        font-size: 18px;
+      }
+      .order-options {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 28px;
+      }
+      .main-content {
+        padding: 30px 20px; /* Adjust padding for smaller screens */
+      }
+    }
+  </style>
+  <script>
+    function scrollToTopIfSamePage(event) {
+      const currentPath = location.pathname.split("/").pop();
+      const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+      if (isSamePage) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const memberName = urlParams.get('member');
+
+      if (memberName) {
+        // Find the button that corresponds to the member name
+        const button = document.querySelector(`button[data-member-name="${memberName}"]`);
+        if (button) {
+          button.classList.add('highlighted-button');
+          // Optional: Scroll to the button
+          button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Remove highlight after a few seconds
+          setTimeout(() => {
+            button.classList.remove('highlighted-button');
+          }, 5000); // Highlight for 5 seconds
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="top-section">
+    <header>
+      <h2>GamePlayMate ©</h2>
+      <nav>
+        <a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a>
+        <a href="games.html">Games</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Genshin Impact Services</h1>
+      <p>Choose your adventure in Teyvat with our expert assistance!</p>
+    </section>
+  </div>
+
+  <main class="main-content">
+    <!-- Image for Genshin Impact -->
+    <img src="images/genshin_gig.png" alt="Genshin Impact Services" class="content-image" />
+
+    <h2 class="section-title" style="margin-top: 0;">Book a Specific Team Member</h2>
+    <div class="order-options">
+      <!-- Team Member 1: Zero Snake -->
+      <div class="option-card">
+        <h3>Book Zero Snake</h3>
+        <p>Highly experienced coach and player. Specializes in Spiral Abyss strategies and team building.</p>
+        <div class="price">Starting at $20 USD</div>
+        <button data-member-name="zero_snake">Book Zero Snake</button>
+      </div>
+
+      <!-- Team Member 2: Dettlaff -->
+      <div class="option-card">
+        <h3>Book Dettlaff404desu</h3>
+        <p>Expert in efficient farming routes and character optimization. Great for daily grind and material runs.</p>
+        <div class="price">Starting at $20 USD</div>
+        <button data-member-name="dettlaff404desu">Book Dettlaff404desu</button>
+      </div>
+
+      <!-- Team Member 3: Syrexx -->
+      <div class="option-card">
+        <h3>Book __syrexx__</h3>
+        <p>Dedicated player with deep knowledge of game mechanics and hidden achievements. Perfect for exploration.</p>
+        <div class="price">Starting at $20 USD</div>
+        <button data-member-name="__syrexx__">Book __syrexx__</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <h3>GamePlayMate &copy; 2025</h3>
+    <div class="footer-links">
+      <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+        <p><a href="games.html">Games</a></p>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <p><a href="#">FAQ</a></p>
+        <p><a href="#">Privacy Policy</a></p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Email: chathuraishtaweera@gmail.com</p>
+        <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Games - GamePlayMate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      html {
+        scroll-behavior: smooth; /* Re-enabled smooth scrolling */
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #333;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .top-section {
+        position: relative;
+        background: url("images/1750437383534.jpg") no-repeat center/cover;
+        background-size: cover;
+        color: white;
+      }
+      .top-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 0;
+      }
+      .top-section > header,
+      .top-section > .hero {
+        position: relative;
+        z-index: 1;
+        width: 100%; /* Ensure they take full width */
+      }
+
+      header {
+        background: transparent;
+        padding: 10px 40px; /* Adjusted padding to make header slightly larger than previous attempt */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      header h2 {
+        font-size: 24px; /* Consistent header font size */
+        margin: 0;
+      }
+      header nav a {
+        margin-left: 20px; /* Adjusted margin for consistency */
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 17px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      header nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #e0e0ff;
+      }
+      nav a.active {
+        background-color: #ffffff;
+        color: #3f3cbb;
+        font-weight: 800;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      }
+
+      .hero {
+        text-align: center;
+        padding: 110px 20px; /* Adjusted padding to make the hero section slightly larger than previous attempt */
+        background: none;
+        color: white;
+      }
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      .hero p { /* Added style for the new tagline */
+        font-size: 24px;
+        margin-top: -10px; /* Adjust as needed for spacing */
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+      .hero button {
+        margin: 10px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      
+      .main-content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 60px 20px;
+        max-width: 100%;
+        box-sizing: border-box;
+        background: linear-gradient(to bottom, #d1cfff, #a797f6); /* Added gradient */
+      }
+
+
+      .content-sections {
+        flex: 1;
+        max-width: 2000px; /* Increased width to make cards bigger */
+      }
+
+      .section {
+        padding: 60px 40px;
+        text-align: center;
+        transition: all 0.5s ease;
+      }
+      .section h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: #3f3cbb;
+        font-weight: 700;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 30px;
+        row-gap: 40px;
+        align-items: start; /* Crucial: Prevents cards from stretching vertically */
+      }
+
+      .card {
+        width: 100%;
+        padding: 30px 25px 35px;
+        border-radius: 14px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: visible;
+        box-sizing: border-box;
+        background: white;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      }
+      .card-image-container {
+        position: relative;
+        cursor: pointer;
+      }
+      .card img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        object-fit: cover;
+        height: 450px; /* Increased image height to 450px */
+        object-position: center 20%;
+      }
+      .expand-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+      }
+      .expand-indicator:hover {
+        background: rgba(111, 97, 232, 0.9);
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      .expand-indicator.active {
+        background: rgba(111, 97, 232, 1);
+        transform: rotate(180deg);
+      }
+      .card h3 {
+        margin: 0 0 12px 0;
+        font-weight: 700;
+        color: #3f3cbb;
+        font-size: 28px; /* Increased font size for game name */
+        cursor: pointer;
+        transition: color 0.3s ease;
+        user-select: none;
+      }
+      .card h3:hover {
+        color: #6f61e8;
+      }
+      .card p {
+        font-size: 20px; /* Increased font size for tagline */
+        margin: 0 0 20px 0;
+        color: #222; /* Darker color for better readability */
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+      .services-list {
+        background: linear-gradient(135deg, #6f61e8, #3f3cbb);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 16px 0 20px 0;
+        max-height: 0; /* Default collapsed state */
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .services-list.active {
+        max-height: 500px; /* Expanded state - Increased from 300px to 500px */
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .services-list h4 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      .services-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .services-list li {
+        padding: 8px 0;
+        font-size: 15px;
+        position: relative;
+        padding-left: 20px;
+        opacity: 0.9;
+      }
+      .services-list li:before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .card .button-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: auto;
+      }
+      .card button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 140px;
+        position: relative;
+        overflow: hidden;
+      }
+      .card button:hover {
+        transform: translateY(-2px);
+      }
+
+      .player-profiles {
+        background: linear-gradient(135deg, #3f3cbb, #6f61e8);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 16px 0 20px 0;
+        max-height: 0; /* Default collapsed state */
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .player-profiles.active {
+        max-height: 400px; /* Expanded state */
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .player-profiles h4 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      .profile-grid {
+        display: grid; /* Always grid when parent is active */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .profile-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        display: none; /* Hidden by default, controlled by JS */
+        cursor: pointer;
+      }
+      .profile-card.visible {
+        display: block; /* Shown when 'visible' class is added by JS */
+      }
+
+      .profile-card img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+        object-fit: cover;
+      }
+      .profile-card h5 {
+        margin: 0 0 5px 0;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .profile-card p {
+        margin: 0;
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      @media (max-width: 1024px) {
+        .main-content-wrapper {
+          padding: 0;
+          gap: 0;
+        }
+        .content-sections {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .cards {
+          grid-template-columns: 1fr; /* Stack cards on small screens */
+          gap: 30px;
+        }
+        .section {
+          padding: 40px 15px;
+        }
+        header {
+          flex-direction: column;
+          padding: 15px 20px;
+        }
+        header nav {
+          margin-top: 10px;
+        }
+        header nav a {
+          margin: 5px 10px;
+        }
+      }
+      .btn-primary {
+        background-color: #ffffff;
+        color: #3f3cbb;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+      }
+      .btn-secondary {
+        background-color: #6f61e8;
+        color: white;
+        border: 2px solid #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+      }
+
+      footer {
+        background-color: #6f61e8;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+      footer h3 {
+        margin: 0 0 20px 0;
+        font-weight: 600;
+      }
+      footer .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: wrap;
+      }
+      footer .footer-links div {
+        min-width: 150px;
+        text-align: left;
+      }
+      footer .footer-links div strong {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      footer a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 6px;
+        transition: color 0.3s ease;
+      }
+      footer a:hover {
+        color: #d1cfff;
+      }
+    </style>
+
+    <script>
+      function scrollToTopIfSamePage(event) {
+        const currentPath = location.pathname.split("/").pop();
+        const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+        if (isSamePage) {
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+      
+      function scrollToGames() {
+        document.getElementById('games-section').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Function to collapse all service lists and player profiles
+      function collapseAllCards() {
+        document.querySelectorAll('.services-list').forEach(list => {
+          list.classList.remove('active');
+        });
+        document.querySelectorAll('.player-profiles').forEach(profile => {
+          profile.classList.remove('active');
+          // Hide all profile cards within collapsed profiles
+          profile.querySelectorAll('.profile-card').forEach(card => card.classList.remove('visible'));
+        });
+        document.querySelectorAll('.expand-indicator').forEach(indicator => {
+          indicator.classList.remove('active');
+        });
+      }
+
+      function toggleServices(gameId) {
+        const servicesList = document.getElementById(gameId);
+        const indicator = document.querySelector(`[onclick*="${gameId}"]`).closest('.card').querySelector('.expand-indicator');
+        
+        // Check if the clicked service list is already active
+        const isActive = servicesList.classList.contains('active');
+
+        collapseAllCards(); // Collapse all other sections first
+
+        if (!isActive) { // If it was not active, activate it
+          servicesList.classList.add('active');
+          indicator.classList.add('active');
+        }
+        // If it was active, collapseAllCards already handled closing it.
+      }
+
+      function showPlayerProfiles(gameId, roleFilter) {
+        const profileSection = document.getElementById(gameId + '-profiles');
+        
+        // Check if the clicked profile section is already active
+        const isActive = profileSection.classList.contains('active');
+
+        collapseAllCards(); // Collapse all other sections first
+
+        if (!isActive) { // If it was not active, activate it and filter
+          profileSection.classList.add('active');
+          
+          const profileCards = profileSection.querySelectorAll('.profile-card');
+          profileCards.forEach(card => {
+            const dataRole = card.dataset.role;
+            if (roleFilter === 'player') {
+              if (dataRole.includes('player')) {
+                card.classList.add('visible'); // Show individual card
+              } else {
+                card.classList.remove('visible'); // Hide individual card
+              }
+            } else if (roleFilter === 'coach') {
+              if (dataRole.includes('coach')) {
+                card.classList.add('visible'); // Show individual card
+              } else {
+                card.classList.remove('visible'); // Hide individual card
+              }
+              } else {
+                card.classList.add('visible'); // Fallback to show all
+              }
+            });
+          }
+          // If it was active, collapseAllCards already handled closing it.
+        }
+
+      // Function to handle redirection from profile card click, now passing team member name
+      function redirectToOrderPage(gameName, teamMemberName) {
+        let page = '';
+        if (gameName === 'genshin') {
+          page = 'order_genshin.html';
+        } else if (gameName === 'honkai') {
+          page = 'order_honkai.html';
+        } else if (gameName === 'zzz') {
+          page = 'order_zzz.html';
+        } else if (gameName === 'wuwa') {
+          page = 'order_waves.html';
+        }
+        if (page) {
+          // Append team member name as a URL parameter
+          window.location.href = `${page}?member=${encodeURIComponent(teamMemberName)}`;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="top-section">
+      <header>
+        <h2>GamePlayMate ©</h2>
+        <nav>
+          <a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a>
+          <a href="games.html" class="active">Games</a>
+          <!-- Removed Services button -->
+          <a href="team.html">Team</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </header>
+      <section class="hero">
+        <h1>Featured Games</h1>
+        <!-- Removed tagline -->
+        <button class="btn-primary" onclick="scrollToGames()">View Our Games</button>
+      </section>
+    </div>
+
+    <div class="main-content-wrapper" id="games-section">
+      <div class="content-sections">
+        <section class="section">
+          <!-- Removed h2 heading -->
+          <div class="cards">
+            <div class="card">
+              <div class="card-image-container" onclick="toggleServices('genshin-services')">
+                <img src="images/59fd52055cfbe56200ef8ee7cab2cf20_8223617932376404559.webp" alt="Genshin Impact" />
+                <div class="expand-indicator">+</div>
+              </div>
+              <h3 onclick="toggleServices('genshin-services')">Genshin Impact</h3>
+              <p>Professional gaming services for Teyvat's greatest adventures</p>
+              <div class="services-list" id="genshin-services">
+                <h4>🎮 Our Genshin Impact Services</h4>
+                <ul>
+                  <li>Spiral Abyss Full Clear (36 Stars)</li>
+                  <li>Daily Commissions & Resin Management</li>
+                  <li>Character & Weapon Farming</li>
+                  <li>Artifact Domain Runs</li>
+                  <li>Story Quest Completion</li>
+                  <li>Event Participation & Rewards</li>
+                  <li>Imaginarium Theatre Clear</li>
+                </ul>
+              </div>
+              <div class="player-profiles" id="genshin-profiles">
+                <h4>🌟 Available Players & Coaches</h4>
+                <div class="profile-grid">
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('genshin', 'zero_snake')">
+                    <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+                    <h5>zero_snake</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('genshin', 'dettlaff404desu')">
+                    <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+                    <h5>dettlaff404desu</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="player" onclick="redirectToOrderPage('genshin', '__syrexx__')">
+                    <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+                    <h5>__syrexx__</h5>
+                    <p>Player</p>
+                  </div>
+                </div>
+              </div>
+              <div class="button-group">
+                <button class="btn-primary" onclick="showPlayerProfiles('genshin', 'player')">Hire a Player</button>
+                <button class="btn-secondary" onclick="showPlayerProfiles('genshin', 'coach')">Book a Coach</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-image-container" onclick="toggleServices('honkai-services')">
+                <img src="images/42742-17514196271420-1920-1751441675.webp" alt="Honkai Star Rail" />
+                <div class="expand-indicator">+</div>
+              </div>
+              <h3 onclick="toggleServices('honkai-services')">Honkai Star Rail</h3>
+              <p>Navigate the stars with our expert Trailblazer services</p>
+              <div class="services-list" id="honkai-services">
+                <h4>🚀 Our Honkai Star Rail Services</h4>
+                <ul>
+                  <li>Memory of Chaos Full Clear</li>
+                  <li>Forgotten Hall Clear</li>
+                  <li>Pure Fiction Clear</li>
+                  <li>Apocalyptic Shadow Clear</li>
+                  <li>Simulated and Divergent Universe Clear</li>
+                  <li>Relic & Light Cone Enhancement</li>
+                  <li>Daily Mission Completion</li>
+                  <li>Character Trace Material Farming</li>
+                  <li>Story & Side Quest Completion</li>
+                  <li>Event Participation & Rewards</li>
+                </ul>
+              </div>
+              <div class="player-profiles" id="honkai-profiles">
+                <h4>🌟 Available Players & Coaches</h4>
+                <div class="profile-grid">
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('honkai', 'zero_snake')">
+                    <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+                    <h5>zero_snake</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('honkai', 'dettlaff404desu')">
+                    <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+                    <h5>dettlaff404desu</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="player" onclick="redirectToOrderPage('honkai', '__syrexx__')">
+                    <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+                    <h5>__syrexx__</h5>
+                    <p>Player</p>
+                  </div>
+                </div>
+              </div>
+              <div class="button-group">
+                <button class="btn-primary" onclick="showPlayerProfiles('honkai', 'player')">Hire a Player</button>
+                <button class="btn-secondary" onclick="showPlayerProfiles('honkai', 'coach')">Book a Coach</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-image-container" onclick="toggleServices('zzz-services')">
+                <img src="images/show.png" alt="Zenless Zone Zero" />
+                <div class="expand-indicator">+</div>
+              </div>
+              <h3 onclick="toggleServices('zzz-services')">Zenless Zone Zero</h3>
+              <p>Master the Hollows with our professional Proxy services</p>
+              <div class="services-list" id="zzz-services">
+                <h4>⚡ Our Zenless Zone Zero Services</h4>
+                <ul>
+                  <li>Hollow Deep Dive Exploration</li>
+                  <li>Bangboo Training & Optimization</li>
+                  <li>W-Engine & Drive Disc Farming</li>
+                  <li>Combat Commission Completion</li>
+                  <li>Character Build Optimization</li>
+                  <li>Daily Routine Management</li>
+                  <li>Event Participation & Rewards</li>
+                  <li>Shiyu defence Clear</li>
+                  <li>Deadly assault Clear</li>
+                </ul>
+              </div>
+              <div class="player-profiles" id="zzz-profiles">
+                <h4>🌟 Available Players & Coaches</h4>
+                <div class="profile-grid">
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('zzz', 'zero_snake')">
+                    <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+                    <h5>zero_snake</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('zzz', 'dettlaff404desu')">
+                    <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+                    <h5>dettlaff404desu</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="player" onclick="redirectToOrderPage('zzz', '__syrexx__')">
+                    <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+                    <h5>__syrexx__</h5>
+                    <p>Player</p>
+                  </div>
+                </div>
+              </div>
+              <div class="button-group">
+                <button class="btn-primary" onclick="showPlayerProfiles('zzz', 'player')">Hire a Player</button>
+                <button class="btn-secondary" onclick="showPlayerProfiles('zzz', 'coach')">Book a Coach</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-image-container" onclick="toggleServices('wuwa-services')">
+                <img src="images/501548469_714365167816379_6231336052933663438_n.jpg" alt="Wuthering Waves" />
+                <div class="expand-indicator">+</div>
+              </div>
+              <h3 onclick="toggleServices('wuwa-services')">Wuthering Waves</h3>
+              <p>Conquer the post-apocalyptic world with our Rover expertise</p>
+              <div class="services-list" id="wuwa-services">
+                <h4>🌊 Our Wuthering Waves Services</h4>
+                <ul>
+                  <li>Tower of Adversity Full Clear</li>
+                  <li>Echo Collection & Tuning</li>
+                  <li>Tacet Field Farming</li>
+                  <li>Weapon & Character Ascension</li>
+                  <li>Exploration & Chest Collection</li>
+                  <li>Daily Activity Completion</li>
+                  <li>Boss Farming & Material Runs</li>
+                  <li>Story & Side Quest Completion</li>
+                  <li>Event Participation & Rewards</li>
+                </ul>
+              </div>
+              <div class="player-profiles" id="wuwa-profiles">
+                <h4>🌟 Available Players & Coaches</h4>
+                <div class="profile-grid">
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('wuwa', 'zero_snake')">
+                    <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+                    <h5>zero_snake</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="coach player" onclick="redirectToOrderPage('wuwa', 'dettlaff404desu')">
+                    <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+                    <h5>dettlaff404desu</h5>
+                    <p>Coach/Player</p>
+                  </div>
+                  <div class="profile-card" data-role="player" onclick="redirectToOrderPage('wuwa', '__syrexx__')">
+                    <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+                    <h5>__syrexx__</h5>
+                    <p>Player</p>
+                  </div>
+                </div>
+              </div>
+              <div class="button-group">
+                <button class="btn-primary" onclick="showPlayerProfiles('wuwa', 'player')">Hire a Player</button>
+                <button class="btn-secondary" onclick="showPlayerProfiles('wuwa', 'coach')">Book a Coach</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <footer>
+      <h3>GamePlayMate &copy; 2025</h3>
+      <div class="footer-links">
+        <div>
+          <strong>Quick Links</strong>
+          <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+          <p><a href="games.html">Games</a></p>
+          <!-- Removed Services link -->
+        </div>
+        <div>
+          <strong>Support</strong>
+          <p><a href="faq.html">FAQ</a></p>
+          <p><a href="privacy_policy.html">Privacy Policy</a></p>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <p>Email: chathuraishtaweera@gmail.com</p>
+          <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  </html>

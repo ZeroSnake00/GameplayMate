@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GamePlayMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Updated gradient to purple tones */
+      background: linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+    .top-section {
+      position: relative;
+      background: url("images/1750437383534.jpg") no-repeat center/cover;
+      background-size: cover;
+      color: white;
+    }
+    .top-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .top-section > header,
+    .top-section > .hero {
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      background: transparent;
+      padding: 20px 40px; /* Consistent padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%; /* Ensure full width */
+      box-sizing: border-box; /* Include padding in width */
+    }
+    header h2 {
+      font-size: 24px; /* Consistent header font size */
+      margin: 0;
+      color: white; /* Reverted to white color */
+    }
+    header nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px; /* Consistent navigation link font size */
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0ff;
+    }
+    nav a.active {
+      background-color: #ffffff;
+      color: #3f3cbb;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: none;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .hero button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background-color: #ffffff;
+      color: #3f3cbb;
+    }
+    .btn-secondary {
+      background-color: #6f61e8;
+      color: white;
+      border: 2px solid #ffffff;
+    }
+    .section {
+      padding: 60px 40px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+		#team .cards {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: nowrap;
+    }
+    .card {
+      background: white;
+      padding: 24px 20px 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      width: 280px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 22px;
+      color: #3f3cbb;
+    }
+
+    .team-member {
+      text-align: center;
+      cursor: pointer; /* Added cursor pointer to indicate clickability */
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .highlight {
+      animation: flash 1s ease-in-out;
+      background-color: #6f61e8 !important;
+      color: white !important;
+    }
+    @keyframes flash {
+      0% { background-color: #6f61e8; color: white; }
+      100% { background-color: white; color: #333; }
+    }
+    .video-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, opacity 0.6s ease;
+      opacity: 0;
+    }
+    .video-wrapper.active {
+      max-height: 900px;
+      margin-top: 30px;
+      opacity: 1;
+    }
+    .video-container {
+      display: flex;
+      justify-content: center;
+    }
+    .video-container video {
+      width: 100%;
+      max-width: 1280px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    footer {
+      background-color: #6f61e8;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer h3 {
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links div {
+      min-width: 150px;
+      text-align: left;
+    }
+    footer .footer-links div strong {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #d1cfff;
+    }
+	.side-images-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 60px 20px;
+      flex-wrap: wrap;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .side-image {
+      max-height: 600px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      flex-shrink: 1;
+      user-select: none;
+    }
+
+    .side-image.left {
+      margin-right: 300px;
+    }
+    .side-image.right {
+      margin-left: 300px;
+    }
+
+
+    .content-sections {
+      flex: 1;
+      max-width: 900px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        margin: 5px 10px;
+      }
+    }
+
+  </style>
+  <script>
+    let toggledVideo = null;
+    let hoverTimeout;
+    const lastPlaybackTimes = {};
+
+    function showVideo(id) {
+      if (toggledVideo) return;
+      clearTimeout(hoverTimeout);
+      const wrapper = document.getElementById(id);
+      // Removed video.play() from here to prevent NotAllowedError on hover
+      document.querySelectorAll('.video-wrapper').forEach(v => v.classList.remove('active'));
+      wrapper.classList.add('active');
+    }
+
+    function hideAllVideos() {
+      if (toggledVideo) return;
+      hoverTimeout = setTimeout(() => {
+        document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+          const vid = wrapper.querySelector("video");
+          lastPlaybackTimes[wrapper.id] = vid.currentTime;
+          vid.pause();
+          wrapper.classList.remove('active');
+        });
+      }, 100);
+    }
+
+    function toggleVideo(id) {
+      const wrapper = document.getElementById(id);
+      const video = wrapper.querySelector("video");
+
+      if (toggledVideo === id) {
+        video.pause();
+        video.currentTime = 0;
+        wrapper.classList.remove('active');
+        toggledVideo = null;
+      } else {
+        document.querySelectorAll('.video-wrapper').forEach(w => {
+          const v = w.querySelector("video");
+          v.pause();
+          w.classList.remove('active');
+        });
+        video.currentTime = 0;
+        video.play(); // This play() is triggered by a direct user click
+        wrapper.classList.add('active');
+        toggledVideo = id;
+      }
+    }
+
+	  function scrollToTopIfSamePage(event) {
+      const currentPath = location.pathname.split("/").pop();
+      const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+      if (isSamePage) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function scrollToTeam(role) {
+      const members = document.querySelectorAll('.team-member');
+      document.getElementById("team").scrollIntoView({ behavior: "smooth" });
+      members.forEach(member => {
+        member.classList.remove("highlight");
+        if (!role || member.dataset.role.includes(role)) {
+          setTimeout(() => member.classList.add("highlight"), 600);
+        }
+      });
+    }
+
+    // New function to redirect to games.html and scroll to the games section
+    function redirectToGamesPage() {
+      window.location.href = 'games.html#games-section';
+    }
+  </script>
+</head>
+<body>
+  <div class="top-section">
+    <header>
+      <h2>GamePlayMate ©</h2>
+      <nav>
+        <a href="index.html" onclick="scrollToTopIfSamePage(event)" class="active">Home</a>
+        <a href="games.html">Games</a>
+        <!-- Removed Services button -->
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Play Smarter. Game Better.</h1>
+      <button class="btn-primary" onclick="scrollToTeam('player')">Hire a Player</button>
+      <button class="btn-secondary" onclick="scrollToTeam('coach')">Book a Coach</button>
+    </section>
+  </div>
+
+  <section class="section">
+    <h2>Supported Games</h2>
+    <div class="cards">
+      <div class="card" onclick="toggleVideo('video-genshin')" onmouseover="showVideo('video-genshin')" onmouseout="hideAllVideos()">
+        <img src="images/e60a9384e2396b723eb9e47df081fbdb.jpg" alt="Genshin Impact" />
+        <h3>Genshin Impact</h3>
+      </div>
+      <div class="card" onclick="toggleVideo('video-honkai')" onmouseover="showVideo('video-honkai')" onmouseout="hideAllVideos()">
+        <img src="images/e52da5a31de788599378924f0e639557.png" alt="Honkai Star Rail" />
+        <h3>Honkai Star Rail</h3>
+      </div>
+      <div class="card" onclick="toggleVideo('video-zzz')" onmouseover="showVideo('video-zzz')" onmouseout="hideAllVideos()">
+        <img src="images/images.jpeg" alt="Zenless Zone Zero" />
+        <h3>Zenless Zone Zero</h3>
+      </div>
+      <div class="card" onclick="toggleVideo('video-wuwa')" onmouseover="showVideo('video-wuwa')" onmouseout="hideAllVideos()">
+        <img src="images/i-was-bored-this-weekend-so-here-are-some-hd-ww-icons-in-v0-mm42ga8ayc7d1.webp" alt="Wuthering Waves" />
+        <h3>Wuthering Waves</h3>
+      </div>
+    </div>
+
+    <div class="video-wrapper" id="video-genshin">
+      <div class="video-container">
+        <video src="videos/genshin.mp4" controls></video>
+      </div>
+    </div>
+    <div class="video-wrapper" id="video-honkai">
+      <div class="video-container">
+        <video src="videos/honkai.mp4" controls></video>
+      </div>
+    </div>
+    <div class="video-wrapper" id="video-zzz">
+      <div class="video-container">
+        <video src="videos/zzz.mp4" controls></video>
+      </div>
+    </div>
+    <div class="video-wrapper" id="video-wuwa">
+      <div class="video-container">
+        <video src="videos/wuwa.mp4" controls></video>
+      </div>
+    </div>
+  </section>
+
+  <div class="side-images-wrapper">
+  <img src="images/Camellya_Full_Sprite.png" alt="Camellya Full Sprite" class="side-image left" />
+
+  <div class="content-sections">
+    <section class="section">
+      <h2>Our Services</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Game Playing</h3>
+        <p>Let us handle the grinding and hard parts for you!</p>
+      </div>
+      <div class="card">
+        <h3>Game Coaching</h3>
+        <p>1-on-1 coaching to help you improve and master the game.</p>
+      </div>
+      <div class="card">
+        <h3>Account Review</h3>
+        <p>Let us audit your account and provide a growth plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="section">
+    <h2>Meet the Team</h2>
+    <div class="cards">
+      <div class="card team-member" data-role="coach player" onclick="redirectToGamesPage()">
+        <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+        <h4>zero_snake</h4>
+        <p>Coach / Player</p>
+      </div>
+      <div class="card team-member" data-role="coach player" onclick="redirectToGamesPage()">
+        <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+        <h4>dettlaff404desu</h4>
+        <p>Coach / Player</p>
+      </div>
+      <div class="card team-member" data-role="player" onclick="redirectToGamesPage()">
+        <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+        <h4>__syrexx__</h4>
+        <p>Player</p>
+      </div>
+    </div>
+  </section>
+  </div>
+  <img src="images/Firefly_Splash_Art.png" alt="Firefly Splash Art" class="side-image right" />
+ </div>
+
+  <footer>
+    <h3>GamePlayMate &copy; 2025</h3>
+    <div class="footer-links">
+      <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+        <p><a href="games.html">Games</a></p>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <p><a href="faq.html">FAQ</a></p>
+        <p><a href="privacy_policy.html">Privacy Policy</a></p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Email: chathuraishtaweera@gmail.com</p>
+        <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

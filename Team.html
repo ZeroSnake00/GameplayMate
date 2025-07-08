@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team - GamePlayMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+    .top-section {
+      position: relative;
+      background: url("images/1750437383534.jpg") no-repeat center/cover;
+      background-size: cover;
+      background-position: center; /* Ensure the background image is centered */
+      color: white;
+    }
+    .top-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .top-section > header,
+    .top-section > .hero {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header {
+      background: transparent;
+      padding: 20px 40px; /* Consistent padding for the header content */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header h2 {
+      font-size: 24px; /* Consistent header font size */
+      margin: 0;
+    }
+    header nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px; /* Consistent navigation link font size */
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0ff;
+    }
+    nav a.active {
+      background-color: #ffffff;
+      color: #3f3cbb;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .hero {
+      text-align: center;
+      padding: 135px 20px; /* Adjusted padding to make it a little bit bigger */
+      background: none;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .section {
+      padding: 60px 40px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+    .team-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .team-card {
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    .team-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 4px solid #6f61e8;
+    }
+    .team-card h3 {
+      margin: 0 0 10px 0;
+      font-weight: 700;
+      font-size: 24px;
+      color: #3f3cbb;
+    }
+    .team-card ul { /* Style for unordered list */
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .team-card ul li { /* Style for list items */
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+    .team-card ul li:last-child {
+      margin-bottom: 0;
+    }
+    .team-card ul li::before { /* Custom bullet point */
+      content: "•";
+      color: #6f61e8;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+      position: absolute;
+      left: 0;
+    }
+    .team-card .role {
+      font-weight: 600;
+      color: #6f61e8;
+      margin-bottom: 15px;
+      display: block;
+    }
+    footer {
+      background-color: #6f61e8;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer h3 {
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links div {
+      min-width: 150px;
+      text-align: left;
+    }
+    footer .footer-links div strong {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #d1cfff;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin-top: 10px;
+      }
+      header nav a {
+        margin: 5px 10px;
+      }
+      .team-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .team-card {
+        width: 90%;
+      }
+    }
+  </style>
+  <script>
+    function scrollToTopIfSamePage(event) {
+      const currentPath = location.pathname.split("/").pop();
+      const isSamePage = currentPath === "index.html" || currentPath === "" || currentPath === "index.html";
+      if (isSamePage) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="top-section">
+    <header>
+      <h2>GamePlayMate ©</h2>
+      <nav>
+        <a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a>
+        <a href="games.html">Games</a>
+        <a href="team.html" class="active">Team</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Meet Our Dedicated Team</h1>
+      <!-- Removed tagline -->
+    </section>
+  </div>
+
+  <section class="section">
+    <h2>Our Team Members</h2>
+    <div class="team-cards">
+      <div class="team-card">
+        <img src="images/124736696_p0.jpg" alt="Zero Snake" />
+        <h3>zero_snake</h3>
+        <span class="role">Coach / Player</span>
+        <ul>
+          <li>Veteran gamer with over a decade of competitive experience.</li>
+          <li>Specializes in strategy and in-depth game mechanics.</li>
+          <li>Excels at coaching and top-tier gameplay.</li>
+          <li>Calm demeanor and analytical approach.</li>
+          <li>Invaluable asset for continuous improvement.</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <img src="images/FB_IMG_1748037570109.jpg" alt="Dettlaff" />
+        <h3>dettlaff404desu</h3>
+        <span class="role">Coach / Player</span>
+        <ul>
+          <li>Versatile talent, skilled in both coaching and playing.</li>
+          <li>Known for exceptional adaptability and quick thinking.</li>
+          <li>Masters new games rapidly and helps others unlock potential.</li>
+          <li>Brings dynamic energy and a wealth of tactical knowledge.</li>
+          <li>Ensures continuous improvement for students.</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <img src="images/49591564cb99eb191642c19c5014d1f9.jpg" alt="Syrexx" />
+        <h3>__syrexx__</h3>
+        <span class="role">Player</span>
+        <ul>
+          <li>Dedicated and highly skilled player.</li>
+          <li>Focuses on achieving peak performance in every game.</li>
+          <li>Keen eye for detail and commitment to excellence.</li>
+          <li>Consistently pushes boundaries of gameplay.</li>
+          <li>Formidable force, always striving for highest ranks and best results.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h3>GamePlayMate &copy; 2025</h3>
+    <div class="footer-links">
+      <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html" onclick="scrollToTopIfSamePage(event)">Home</a></p>
+        <p><a href="games.html">Games</a></p>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <p><a href="faq.html">FAQ</a></p>
+        <p><a href="privacy_policy.html">Privacy Policy</a></p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Email: chathuraishtaweera@gmail.com</p>
+        <p>Discord: <a href="https://discord.gg/hFc9MXsq7M" target="_blank">Gacha Gamers Sri Lanka</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
