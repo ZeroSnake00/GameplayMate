@@ -1,0 +1,1083 @@
+/* ==========================================================================
+   GamePlayMate — shared stylesheet
+   Replaces the ten separate <style> blocks that used to live in each page.
+   Page-specific rules are scoped by the body class (page-home, page-games,
+   page-team, page-contact, page-faq, page-privacy, page-order).
+   ========================================================================== */
+
+:root {
+  --brand:        #6f61e8;
+  --brand-dark:   #3f3cbb;
+  --brand-light:  #d1cfff;
+  --brand-pale:   #e0e0ff;
+  --ink:          #333;
+  --ink-soft:     #555;
+  --surface:      #fff;
+  --page-grad:    linear-gradient(to bottom, #d1cfff 0%, #a797f6 100%);
+
+  /* One fluid side gutter for header, hero, sections and footer, so every
+     band lines up at every width instead of each hard-coding its own. */
+  --gutter:      clamp(16px, 4vw, 40px);
+  --section-y:   clamp(40px, 6vw, 60px);
+  --content-max: 900px;
+  --radius:      14px;
+
+  --shadow-card:  0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* --------------------------------------------------------------- base --- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--page-grad);
+  color: var(--ink);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img,
+video { max-width: 100%; }
+
+/* ---------------------------------------------------------- top band --- */
+
+.top-section {
+  position: relative;
+  background: url("images/1750437383534.jpg") no-repeat center 35% / cover;
+  color: #fff;
+  /* Height tied to the viewport rather than a fixed pixel band. A fixed
+     height made the same photo crop to a totally different slice on every
+     screen shape — a thin sliver on wide monitors, a deep box on laptops. */
+  min-height: clamp(300px, 44vh, 560px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.top-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.top-section > header,
+.top-section > .hero {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------ header --- */
+
+header {
+  background: transparent;
+  padding: 16px var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+header h2 {
+  font-size: clamp(19px, 2.4vw, 24px);
+  margin: 0;
+  color: #fff;
+}
+
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  justify-content: center;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(14px, 1.5vw, 17px);
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--brand-pale);
+}
+
+nav a.active {
+  background-color: #fff;
+  color: var(--brand-dark);
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* -------------------------------------------------------------- hero --- */
+
+.hero {
+  text-align: center;
+  padding: clamp(48px, 9vw, 110px) var(--gutter);
+  background: none;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+
+.hero p {
+  font-size: clamp(16px, 2.2vw, 24px);
+  margin: -10px 0 30px;
+  opacity: 0.9;
+}
+
+.hero button {
+  margin: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ----------------------------------------------------------- buttons --- */
+
+.btn-primary {
+  background-color: #fff;
+  color: var(--brand-dark);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: var(--brand);
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------------------------------- section --- */
+
+.section {
+  padding: var(--section-y) var(--gutter);
+  text-align: center;
+  transition: all 0.5s ease;
+}
+
+.section h2 {
+  font-size: clamp(24px, 3.4vw, 32px);
+  color: var(--brand-dark);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------ footer --- */
+
+footer {
+  background-color: var(--brand);
+  color: #fff;
+  padding: clamp(28px, 5vw, 40px) var(--gutter);
+  text-align: center;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+footer h3 {
+  margin: 0 0 20px;
+  font-weight: 600;
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px clamp(24px, 5vw, 60px);
+  flex-wrap: wrap;
+}
+
+footer .footer-links div {
+  min-width: 150px;
+  text-align: left;
+}
+
+footer .footer-links div strong {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+footer a:hover { color: var(--brand-light); }
+
+/* ======================================================= HOME (index) === */
+
+.page-home .cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.page-home .card {
+  background: #fff;
+  padding: 24px 20px 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  /* Was a hard 280px, which could not share a narrow row. */
+  flex: 1 1 220px;
+  max-width: 300px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-home .card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.page-home .card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.page-home .card h3 {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--brand-dark);
+}
+
+.page-home .team-member { cursor: pointer; }
+
+.page-home .team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.page-home .highlight {
+  animation: flash 1s ease-in-out;
+  background-color: var(--brand) !important;
+  color: #fff !important;
+}
+
+@keyframes flash {
+  0%   { background-color: #6f61e8; color: #fff; }
+  100% { background-color: #fff;    color: #333; }
+}
+
+.page-home .video-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+}
+
+.page-home .video-wrapper.active {
+  max-height: 900px;
+  margin-top: 30px;
+  opacity: 1;
+}
+
+.page-home .video-container {
+  display: flex;
+  justify-content: center;
+}
+
+.page-home .video-container video {
+  width: 100%;
+  max-width: 1280px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Side character art.
+   This is what used to break the page. It was a three-item flex row whose
+   wrap threshold was set by the images' NATURAL file widths (622px and
+   810px) plus 300px hard margins — so the row needed roughly 2450px to stay
+   intact and dropped the right-hand character onto its own line below
+   everything on any narrower screen. A grid cannot wrap like that: the art
+   lives in side columns that shrink with the viewport, and is simply hidden
+   once there is no room for it. */
+.page-home .side-images-wrapper {
+  display: grid;
+  /* Middle column is a little narrower than the site's 900px content width so
+     the side columns have room to show art at a size that looks deliberate. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 820px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(12px, 2vw, 40px);
+  padding: var(--section-y) var(--gutter);
+  width: 100%;
+}
+
+.page-home .side-image {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  justify-self: center;
+  margin: 0;
+  user-select: none;
+}
+
+.page-home .content-sections { min-width: 0; }
+
+/* Below this there is no room for the art to read as anything but clutter,
+   so it goes away entirely rather than squeezing the content. */
+@media (max-width: 1280px) {
+  .page-home .side-images-wrapper { grid-template-columns: minmax(0, 1fr); }
+  .page-home .side-image { display: none; }
+}
+
+/* ============================================================== GAMES === */
+
+.page-games { background: #f8f9fa; }
+
+.page-games .main-content-wrapper {
+  padding: var(--section-y) 0;
+  background: var(--page-grad);
+}
+
+.page-games .content-sections {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.page-games .cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 30px);
+  row-gap: clamp(24px, 3vw, 40px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .page-games .cards { grid-template-columns: minmax(0, 1fr); }
+}
+
+.page-games .card {
+  width: 100%;
+  padding: clamp(18px, 2.5vw, 30px) clamp(16px, 2vw, 25px) clamp(22px, 3vw, 35px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.page-games .card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.page-games .card-image-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.page-games .card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  object-fit: cover;
+  /* Was a flat 450px, which swallowed a phone screen whole. */
+  height: clamp(180px, 26vw, 450px);
+  object-position: center 20%;
+}
+
+.page-games .expand-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.page-games .expand-indicator:hover {
+  background: rgba(111, 97, 232, 0.9);
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.page-games .expand-indicator.active {
+  background: rgba(111, 97, 232, 1);
+  transform: rotate(180deg);
+}
+
+.page-games .card h3 {
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  font-size: clamp(20px, 2.6vw, 28px);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.page-games .card h3:hover { color: var(--brand); }
+
+.page-games .card p {
+  font-size: clamp(15px, 1.7vw, 20px);
+  margin: 0 0 20px;
+  color: #222;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.page-games .services-list,
+.page-games .player-profiles {
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 16px 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.page-games .services-list { background: linear-gradient(135deg, #6f61e8, #3f3cbb); }
+.page-games .player-profiles { background: linear-gradient(135deg, #3f3cbb, #6f61e8); }
+
+/* Generous ceilings: the lists wrap to more lines on narrow screens, and the
+   old 500px/400px caps clipped them there. */
+.page-games .services-list.active {
+  max-height: 1200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-games .player-profiles.active {
+  max-height: 900px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-games .services-list h4,
+.page-games .player-profiles h4 {
+  margin: 0 0 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.page-games .services-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-games .services-list li {
+  padding: 8px 0 8px 20px;
+  font-size: 15px;
+  position: relative;
+  opacity: 0.9;
+  text-align: left;
+}
+
+.page-games .services-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+.page-games .profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.page-games .profile-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  display: none;
+  cursor: pointer;
+}
+
+.page-games .profile-card.visible { display: block; }
+
+.page-games .profile-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+
+.page-games .profile-card h5 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-games .profile-card p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.page-games .card .button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.page-games .card button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  flex: 1 1 140px;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-games .card button:hover { transform: translateY(-2px); }
+
+/* =============================================================== TEAM === */
+
+.page-team .team-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 3vw, 30px);
+}
+
+.page-team .team-card {
+  background: #fff;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  /* Was a hard 300px that flipped to a 90% column at 768px and nothing in
+     between. Now it shares rows at any width. */
+  flex: 1 1 260px;
+  max-width: 340px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-team .team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.page-team .team-card img {
+  width: clamp(96px, 12vw, 120px);
+  height: clamp(96px, 12vw, 120px);
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid var(--brand);
+}
+
+.page-team .team-card h3 {
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 24px);
+  color: var(--brand-dark);
+}
+
+.page-team .team-card .role {
+  font-weight: 600;
+  color: var(--brand);
+  margin-bottom: 15px;
+  display: block;
+}
+
+.page-team .team-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.page-team .team-card ul li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.page-team .team-card ul li:last-child { margin-bottom: 0; }
+
+.page-team .team-card ul li::before {
+  content: "•";
+  color: var(--brand);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* ============================================================ CONTACT === */
+
+.page-contact .contact-info,
+.page-contact .discord-section {
+  background: #fff;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-contact .contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-contact .discord-section {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.page-contact .contact-info h3,
+.page-contact .discord-section h3 {
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--brand-dark);
+  margin-bottom: 20px;
+}
+
+.page-contact .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--ink-soft);
+  text-align: left;
+  width: 100%;
+  max-width: 420px;
+}
+
+.page-contact .contact-item strong {
+  color: var(--brand);
+  min-width: 80px;
+}
+
+.page-contact .contact-item a {
+  color: var(--brand-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  overflow-wrap: anywhere;
+}
+
+.page-contact .contact-item a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+.page-contact .discord-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-contact .discord-content img {
+  width: clamp(120px, 22vw, 150px);
+  height: clamp(120px, 22vw, 150px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--brand);
+}
+
+.page-contact .contact-image {
+  width: clamp(170px, 42vw, 260px);
+  height: clamp(170px, 42vw, 260px);
+  border-radius: 50%;
+  object-fit: contain;
+  border: 4px solid var(--brand);
+  margin-bottom: 20px;
+}
+
+.page-contact .discord-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.page-contact .discord-content .owner-admin {
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.page-contact .highlight-text {
+  background-color: var(--brand-light);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--brand-dark);
+}
+
+.page-contact .btn-primary {
+  display: inline-block;
+  background-color: var(--brand-dark);
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.page-contact .btn-primary:hover {
+  background-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ======================================== FAQ / PRIVACY / ORDER shells === */
+
+.page-faq .faq-page-layout {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.page-faq .main-content,
+.page-privacy .main-content,
+.page-order .main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 40px);
+  gap: 30px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.page-faq .main-content,
+.page-privacy .main-content {
+  max-width: var(--content-max);
+  /* Lifts the card over the banner. Scales down with the page so it never
+     eats the heading on a small screen. */
+  margin-top: clamp(-50px, -4vw, -20px);
+  margin-bottom: 40px;
+}
+
+.page-privacy .main-content { max-width: var(--content-max); }
+
+.page-faq .section-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.page-faq .section-title,
+.page-privacy .section-title,
+.page-order .section-title {
+  font-size: clamp(24px, 3.6vw, 36px);
+  color: var(--brand-dark);
+  text-align: center;
+  width: 100%;
+  margin: 0 0 30px;
+}
+
+.page-faq .section-title { margin-bottom: 0; }
+
+.page-faq .faq-title-image {
+  margin-top: 15px;
+  width: clamp(130px, 26vw, 200px);
+  height: clamp(130px, 26vw, 200px);
+  border-radius: 50%;
+  object-fit: contain;
+  border: 4px solid var(--brand);
+}
+
+.page-faq .faq-item {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.page-faq .faq-question {
+  padding: clamp(14px, 2vw, 20px) clamp(16px, 2.4vw, 25px);
+  background-color: var(--brand-pale);
+  color: var(--brand-dark);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  border-bottom: 1px solid #c1c1ff;
+  transition: background-color 0.3s ease;
+}
+
+.page-faq .faq-question:hover { background-color: #c1c1ff; }
+
+.page-faq .faq-question::after {
+  content: '+';
+  font-size: 24px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.page-faq .faq-question.active::after { content: '-'; }
+
+.page-faq .faq-answer {
+  padding: 0 clamp(16px, 2.4vw, 25px);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  background-color: #fff;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Answers wrap to many more lines on a phone; the old 500px cap cut them off. */
+.page-faq .faq-answer.active {
+  max-height: 1200px;
+  padding: 20px clamp(16px, 2.4vw, 25px);
+}
+
+/* ============================================================ PRIVACY === */
+
+.page-privacy .privacy-image {
+  width: clamp(180px, 44vw, 300px);
+  height: clamp(180px, 44vw, 300px);
+  border-radius: 50%;
+  object-fit: contain;
+  margin-bottom: 30px;
+  border: 4px solid var(--brand);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-privacy .privacy-section {
+  width: 100%;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.page-privacy .privacy-section h3 {
+  font-size: clamp(19px, 2.4vw, 24px);
+  color: var(--brand);
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--brand-pale);
+  padding-bottom: 5px;
+}
+
+.page-privacy .privacy-section p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.page-privacy .privacy-section ul {
+  list-style: disc;
+  margin-left: 20px;
+  color: var(--ink-soft);
+}
+
+.page-privacy .privacy-section ul li { margin-bottom: 5px; }
+
+/* ============================================================== ORDER === */
+
+.page-order .main-content {
+  max-width: 1200px;
+  /* Was a translate, which lifted the card visually but left a dead 50px gap
+     in the flow below it. A negative margin actually moves the layout. */
+  margin-top: clamp(-50px, -4vw, -20px);
+  margin-bottom: 0;
+}
+
+.page-order .content-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-order .order-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(16px, 2.4vw, 25px);
+  width: 100%;
+  max-width: var(--content-max);
+}
+
+.page-order .option-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: clamp(20px, 3vw, 30px);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.page-order .option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.page-order .option-card h3 {
+  font-size: clamp(20px, 2.4vw, 24px);
+  color: var(--brand);
+  margin-bottom: 15px;
+  overflow-wrap: anywhere;
+}
+
+.page-order .option-card p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.page-order .option-card .price {
+  font-size: clamp(22px, 2.8vw, 28px);
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 25px;
+}
+
+.page-order .option-card button {
+  background-color: var(--brand-dark);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  overflow-wrap: anywhere;
+}
+
+.page-order .option-card button:hover {
+  background-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes highlight-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(111, 97, 232, 0.7), 0 0 0 0 rgba(111, 97, 232, 0.5); }
+  50%  { box-shadow: 0 0 0 15px rgba(111, 97, 232, 0), 0 0 0 25px rgba(111, 97, 232, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(111, 97, 232, 0.7), 0 0 0 0 rgba(111, 97, 232, 0.5); }
+}
+
+.highlighted-button {
+  animation: highlight-pulse 1.5s infinite;
+  border: 3px solid var(--brand) !important;
+  background-color: var(--brand) !important;
+}
+
+/* ======================================================= touch + motion === */
+
+/* :hover sticks after a tap on a touch screen, leaving cards lifted. */
+@media (hover: none) {
+  .page-home .card:hover,
+  .page-games .card:hover,
+  .page-team .team-card:hover,
+  .page-order .option-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
